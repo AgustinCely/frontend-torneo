@@ -1,0 +1,50 @@
+<mat-card>Ingrese los datos del torneo</mat-card>
+
+<br>
+
+<form class="example-container" [formGroup]="form" (ngSubmit)="operar()" #frmTorneo="ngForm">
+
+  <div [hidden]="true">
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="ID" required formControlName="id">
+    </mat-form-field>
+  </div>
+
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Nombre Torneo" required formControlName="nombreTorneo">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Descripcion Torneo" required formControlName="descripcionTorneo">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Fecha inicio" required formControlName="f_iniTorneo">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+      <input matInput placeholder="Fecha fin" required formControlName="f_finTorneo">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+        <input matInput placeholder="cantidad Jugadores" required formControlName="cantidadJugadores">
+      </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <input type="text" placeholder="Director" matInput [matAutocomplete]="autoDirector" [formControl]="myControlDirector" formControlName="director">
+    <mat-autocomplete #autoDirector="matAutocomplete" [displayWith]="displayFn" (optionSelected)="seleccionarDirector($event)">
+      <mat-option *ngFor="let p of filteredOptions | async" [value]="p">
+        {{ p.nombreDirector }}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit" [disabled]="frmTorneo.invalid">
+    <mat-icon>done</mat-icon>
+    <span>Aceptar</span>
+  </button>
+  <button mat-raised-button color="accent" routerLink='/torneo' type="button">
+    <mat-icon>close</mat-icon>
+    <span>Cancelar</span>
+  </button>
+</form>

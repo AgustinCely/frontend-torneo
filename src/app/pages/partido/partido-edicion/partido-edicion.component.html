@@ -1,0 +1,74 @@
+<mat-card>Ingrese los del partido</mat-card>
+
+<br>
+
+<form class="example-container" [formGroup]="form" (ngSubmit)="operar()" #frmPartido="ngForm">
+
+  <div [hidden]="true">
+    <mat-form-field class="example-full-width">
+      <input matInput placeholder="ID" required formControlName="id">
+    </mat-form-field>
+  </div>
+
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Fecha" required formControlName="fecha">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Hora" required formControlName="hora" type="number">
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <input type="text" placeholder="Arbitro" matInput [matAutocomplete]="autoArbitro" [formControl]="myControlArbitro" formControlName="arbitro">
+    <mat-autocomplete #autoArbitro="matAutocomplete" [displayWith]="displayFnArbitro" (optionSelected)="seleccionarArbitro($event)">
+      <mat-option *ngFor="let p of filteredOptionsArbitro | async" [value]="p">
+        {{ p.nombArbitro }} {{p.apeArbitro}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <input type="text" placeholder="Cancha" matInput [matAutocomplete]="autoCancha" [formControl]="myControlCancha" formControlName="cancha">
+    <mat-autocomplete #autoCancha="matAutocomplete" [displayWith]="displayFnCancha" (optionSelected)="seleccionarCancha($event)">
+      <mat-option *ngFor="let c of filteredOptionsCancha | async" [value]="c">
+        {{ c.nombcancha }}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+      <mat-form-field class="example-full-width">
+        <input type="text" placeholder="Jugador Local" matInput [matAutocomplete]="autoJugador" [formControl]="myControlJugador" formControlName="jugadorlocal">
+        <mat-autocomplete #autoJugador="matAutocomplete" [displayWith]="displayFn" (optionSelected)="seleccionarJugador($event)">
+          <mat-option *ngFor="let j of filteredOptionsJugador | async" [value]="j">
+            {{ j.nombjugadorlocal }} {{j.apejugadorlocal}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+            <input type="text" placeholder="Jugador Visitante" matInput [matAutocomplete]="autoJugadorV" [formControl]="myControlJugadorV" formControlName="jugadorvisitante">
+            <mat-autocomplete #autoJugadorV="matAutocomplete" [displayWith]="displayFnV" (optionSelected)="seleccionarJugadorV($event)">
+              <mat-option *ngFor="let t of filteredOptionsJugadorVisi | async" [value]="t">
+                {{ t.nombjugadorvisitante }} {{t.apejugadorvisitante}}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width">
+            <input type="text" placeholder="Ronda" matInput [matAutocomplete]="autoRonda" [formControl]="myControlRonda" formControlName="ronda">
+            <mat-autocomplete #autoRonda="matAutocomplete" [displayWith]="displayFnRonda" (optionSelected)="seleccionarRonda($event)">
+              <mat-option *ngFor="let r of filteredOptionsRonda | async" [value]="r">
+                {{ r.descripcionRonda }}
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+
+          <button mat-raised-button color="primary" type="submit" [disabled]="frmPartido.invalid">
+            <mat-icon>done</mat-icon>
+            <span>Aceptar</span>
+          </button>
+          <button mat-raised-button color="accent" routerLink='/partido' type="button">
+            <mat-icon>close</mat-icon>
+            <span>Cancelar</span>
+          </button>
+</form>
